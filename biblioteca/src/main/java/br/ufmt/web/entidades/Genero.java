@@ -4,12 +4,13 @@ public class Genero{
     private String nome;
 
     /* 
-    public int getId(){
-        return id;
-    }
-    public Void setId(int id) {
-        this.id = id;
-    } */
+    
+    
+    
+    
+    
+    
+    */
     public int getId() {
         return id;
     }
