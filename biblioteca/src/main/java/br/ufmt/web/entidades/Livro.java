@@ -4,12 +4,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+//import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+//import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+//import java.util.ArrayList;
+//import java.util.Collections;
+//import java.util.Scanner;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,19 +24,25 @@ import lombok.Setter;
 @Setter
 
 public class Livro{
-    /* private int id;
-    private String titulo;
-    private int ISBN;
-    private int data_publicacao;
- */
+
+   /*
     @Id
     @GeneratedValue(generator = "seqLivro", strategy = GenerationType.SEQUENCE)
     private int id;
-    @ManyToOne
+    private int id;
+    private String titulo;
+    private int ISBN;
+    private int data_publicacao;
+    */
+    @Id
+    @GeneratedValue(generator = "seqLivro", strategy = GenerationType.SEQUENCE)
+    private int id;
+
+    @OneToMany
     @JoinColumn(name = "autor_id")
     private Autor autor;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "livro")
     @JoinColumn(name = "genero_id")
     private Genero genero;
 
@@ -42,9 +51,9 @@ public class Livro{
     private Editora editor_id;
     private int data_publicacao;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+   // @ManyToOne
+   // @JoinColumn(name = "usuario_id")
+    //private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "reserva_id")
