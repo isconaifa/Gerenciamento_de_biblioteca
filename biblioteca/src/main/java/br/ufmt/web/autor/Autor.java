@@ -1,14 +1,14 @@
-package br.ufmt.web.entidades;
+package br.ufmt.web.autor;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.ufmt.web.autorlivro.AutorLivro;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,22 +19,17 @@ import lombok.Setter;
 @Setter
 
 public class Autor{
-    private int id;
+    //private int id;
     private String nome;
     private String endereco;
     private String cpf;
 
+  
     @Id
-    @GeneratedValue(generator = "seq_autor_id", strategy = GenerationType.SEQUENCE)
-    public int getId() {
-        return id;
-    }
-
-    @ManyToMany(mappedBy = "autor")
-    @JoinColumn(name = "id_livro")
-     private Livro livro;
-    }
-    
+    @GeneratedValue(generator = "seqAutor", strategy = GenerationType.SEQUENCE)
+    private int id;
 
 
+    @OneToMany(mappedBy = "autor")
+    private List<AutorLivro> autor;
 }

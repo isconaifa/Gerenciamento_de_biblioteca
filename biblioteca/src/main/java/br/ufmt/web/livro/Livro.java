@@ -1,4 +1,7 @@
-package br.ufmt.web.entidades;
+package br.ufmt.web.livro;
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +17,10 @@ import javax.persistence.Table;
 //import java.util.Collections;
 //import java.util.Scanner;
 
+import br.ufmt.web.autorlivro.AutorLivro;
+import br.ufmt.web.editora.Editora;
+import br.ufmt.web.generolivro.GenerLivro;
+import br.ufmt.web.reservalivro.ReservaLivro;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +31,6 @@ import lombok.Setter;
 @Setter
 
 public class Livro{
-
    /*
     @Id
     @GeneratedValue(generator = "seqLivro", strategy = GenerationType.SEQUENCE)
@@ -39,28 +45,25 @@ public class Livro{
     private int id;
 
     @OneToMany
-    @JoinColumn(name = "autor_id")
-    private Autor autor;
+    private List<AutorLivro> autor;
 
     @OneToMany(mappedBy = "livro")
-    @JoinColumn(name = "genero_id")
-    private Genero genero;
+    private List<GenerLivro> generos;
 
     @ManyToOne
     @JoinColumn(name = "editor_id")
     private Editora editor_id;
-    private int data_publicacao;
+    private Date data_publicacao;
 
-   // @ManyToOne
+   // @oneT
    // @JoinColumn(name = "usuario_id")
     //private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "reserva_id")
-    private Reserva reserva;
-    private int data_emprestimo = 0;
-    private int data_devolucao = 0;
-    private int ISBN;
+    @OneToMany(mappedBy = "reservation")
+    private List<ReservaLivro> reservas;
+ 
+  
+    private String ISBN;
     private String titulo;
   
 
