@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.ufmt.web.generolivro.GenerLivro;
+import br.ufmt.web.generolivro.GeneroLivro;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,5 +27,5 @@ public class Genero{
     private int id;
 
     @OneToMany(mappedBy = "genero")
-    private List<GenerLivro> genero;
+    private List<GeneroLivro> genero;
 }

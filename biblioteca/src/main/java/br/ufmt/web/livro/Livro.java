@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 import br.ufmt.web.autorlivro.AutorLivro;
 import br.ufmt.web.editora.Editora;
-import br.ufmt.web.generolivro.GenerLivro;
+import br.ufmt.web.generolivro.GeneroLivro;
 import br.ufmt.web.reservalivro.ReservaLivro;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,7 +48,7 @@ public class Livro{
     private List<AutorLivro> autor;
 
     @OneToMany(mappedBy = "livro")
-    private List<GenerLivro> generos;
+    private List<GeneroLivro> generos;
 
     @ManyToOne
     @JoinColumn(name = "editor_id")
