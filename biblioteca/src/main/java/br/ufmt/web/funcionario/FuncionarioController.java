@@ -30,8 +30,8 @@ public class FuncionarioController {
   public ResponseEntity<FuncionarioResponse> getById(@PathVariable(name = "id") int id) {
     Optional<Funcionario> found = repository.findById(id);
     if(found.isPresent()){
-     // FuncionarioResponse response = FuncionarioResponse.from(found.get());
-     // return ResponseEntity.ok().body(response);
+     FuncionarioResponse response = FuncionarioResponse.from(found.get());
+     return ResponseEntity.ok().body(response);
     }
     return ResponseEntity.notFound().build();
 

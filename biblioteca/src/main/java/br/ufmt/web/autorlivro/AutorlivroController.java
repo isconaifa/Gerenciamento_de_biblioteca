@@ -34,8 +34,8 @@ public class AutorController {
   public ResponseEntity<AutorlivroResponse> getById(@PathVariable(name = "id") int id) {
     Optional<AutorLivro> found = repository.findById(id);
     if(found.isPresent()){
-      //AutorlivroResponse response = AutorlivroResponse.from(found.get());
-      //return ResponseEntity.ok().body(response);
+      AutorlivroResponse response = AutorlivroResponse.from(found.get());
+      return ResponseEntity.ok().body(response);
     }
     return ResponseEntity.notFound().build();
 

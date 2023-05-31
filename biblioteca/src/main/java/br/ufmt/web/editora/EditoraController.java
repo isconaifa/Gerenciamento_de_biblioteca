@@ -31,8 +31,8 @@ public class EditoraController {
   public ResponseEntity<EditoraResponse> getById(@PathVariable(name = "id") int id) {
     Optional<Editora> found = repository.findById(id);
     if(found.isPresent()){
-     // EditoraResponse response = EditoraResponse.from(found.get());
-     // return ResponseEntity.ok().body(response);
+     EditoraResponse response = EditoraResponse.from(found.get());
+     return ResponseEntity.ok().body(response);
     }
     return ResponseEntity.notFound().build();
 
@@ -52,7 +52,8 @@ public ResponseEntity<Void> remover(@PathVariable(name = "pk") int id){
 public ResponseEntity cadastrar(@RequestBody EditoraRequest request){
   Editora editora = new Editora();
   editora.setNome(request.getNome());
-  editora.setCpf(request.getCpf());
+  editora.setObra(request.getObra());
+  editora.setTelefone(request.getTelefone());
 
   try {
     repository.save(editora);

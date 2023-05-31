@@ -30,8 +30,8 @@ public class UsuarioController {
   public ResponseEntity<UsuarioResponse> getById(@PathVariable(name = "id") int id) {
     Optional<Usuario> found = repository.findById(id);
     if(found.isPresent()){
-     // UsuarioResponse response = UsuarioResponse.from(found.get());
-     // return ResponseEntity.ok().body(response);
+    UsuarioResponse response = UsuarioResponse.from(found.get());
+    return ResponseEntity.ok().body(response);
     }
     return ResponseEntity.notFound().build();
 
@@ -50,6 +50,7 @@ public ResponseEntity<Void> remover(@PathVariable(name = "pk") int id){
 @PostMapping
 public ResponseEntity cadastrar(@RequestBody UsuarioRequest request){
   Usuario usuario = new Usuario();
+  usuario.setId(request.getId());
   usuario.setNome(request.getNome());
   usuario.setCpf(request.getCpf());
   usuario.setEndereco(request.getEndereco());
@@ -68,7 +69,7 @@ public ResponseEntity cadastrar(@RequestBody UsuarioRequest request){
 public ResponseEntity atualizar(@PathVariable int id,
                               @RequestBody UsuarioRequest request){
  Usuario usuario = new Usuario();
-  usuario.setId(id);
+  usuario.setId(request.getId());
   usuario.setNome(request.getNome());
    usuario.setEndereco(request.getEndereco());
    usuario.setCpf(request.getCpf());

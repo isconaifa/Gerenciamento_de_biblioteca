@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ufmt.web.funcionario.Funcionario;
 import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(path = "/livro")
@@ -32,8 +31,8 @@ public class LivroController {
   public ResponseEntity<LivroResponse> getById(@PathVariable(name = "id") int id) {
     Optional<Livro> found = repository.findById(id);
     if(found.isPresent()){
-     // LivroResponse response = LivrooResponse.from(found.get());
-     // return ResponseEntity.ok().body(response);
+     LivroResponse response = LivroResponse.from(found.get());
+     return ResponseEntity.ok().body(response);
     }
     return ResponseEntity.notFound().build();
 
@@ -68,8 +67,9 @@ public ResponseEntity cadastrar(@RequestBody LivroRequest request){
 @PatchMapping(path = "/{id}")
 public ResponseEntity atualizar(@PathVariable int id, @RequestBody LivroRequest request){
  Livro livro = new Livro();
-  livro.setId(id);
-  livro.setNome(request.getNome());
+ livro.setISBN(request.getISBN());
+ livro.setTitulo(request.getTitulo());
+ livro.setId(request.getId());
 
   try {
     repository.save(livro);

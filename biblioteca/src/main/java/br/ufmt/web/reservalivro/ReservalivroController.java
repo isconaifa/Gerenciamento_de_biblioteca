@@ -30,8 +30,8 @@ public class ReservalivroController {
   public ResponseEntity<ReservalivroResponse> getById(@PathVariable(name = "id") int id) {
     Optional<ReservaLivro> found = repository.findById(id);
     if(found.isPresent()){
-     // ReservalivroResponse response = ReservalivroResponse.from(found.get());
-     // return ResponseEntity.ok().body(response);
+    ReservalivroResponse response = ReservalivroResponse.from(found.get());
+    return ResponseEntity.ok().body(response);
     }
     return ResponseEntity.notFound().build();
 

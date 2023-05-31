@@ -30,8 +30,8 @@ public class GeneroController {
   public ResponseEntity<GeneroResponse> getById(@PathVariable(name = "id") int id) {
     Optional<Genero> found = repository.findById(id);
     if(found.isPresent()){
-     // GeneroResponse response = GeneroResponse.from(found.get());
-     // return ResponseEntity.ok().body(response);
+     GeneroResponse response = GeneroResponse.from(found.get());
+     return ResponseEntity.ok().body(response);
     }
     return ResponseEntity.notFound().build();
 
