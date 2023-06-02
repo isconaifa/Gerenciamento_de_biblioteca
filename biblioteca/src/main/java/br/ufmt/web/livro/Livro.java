@@ -44,7 +44,7 @@ public class Livro{
     @GeneratedValue(generator = "seqLivro", strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "livro")
     private List<AutorLivro> autor;
 
     @OneToMany(mappedBy = "livro")
@@ -52,14 +52,14 @@ public class Livro{
 
     @ManyToOne
     @JoinColumn(name = "editor_id")
-    private Editora editor_id;
+    private Editora editora;
     private Date data_publicacao;
 
    // @oneT
    // @JoinColumn(name = "usuario_id")
     //private Usuario usuario;
 
-    @OneToMany(mappedBy = "reservation")
+    @OneToMany(mappedBy = "livro")
     private List<ReservaLivro> reservas;
  
   

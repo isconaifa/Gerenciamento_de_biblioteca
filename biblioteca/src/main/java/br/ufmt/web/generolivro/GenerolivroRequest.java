@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class GenerolivroRequest {
-    private Genero genero;
-    private Livro livro;
+    private int  generoId;
+    private int  livroId;
 }

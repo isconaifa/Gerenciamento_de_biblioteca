@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
 
 public class AutorlivroResponse {
     private int id;
-    private Livro livro;
-    private Autor autor;
+    private String livro;
+    private String autor;
 
 public static AutorlivroResponse from(AutorLivro entidade){
     AutorlivroResponse response = new AutorlivroResponse();
     response.setId(entidade.getId());
-    response.setLivro(entidade.getLivro());
-    response.setAutor(entidade.getAutor());
+    response.setLivro(entidade.getLivro().getTitulo());
+    response.setAutor(entidade.getAutor().getNome());
     return response;
 }
     

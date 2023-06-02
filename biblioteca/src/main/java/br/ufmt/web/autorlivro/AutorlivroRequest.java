@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class AutorlivroRequest {
-    private Livro livro;
-    private Autor autor;
+    private int livroId;
+    private int autorId;
 }

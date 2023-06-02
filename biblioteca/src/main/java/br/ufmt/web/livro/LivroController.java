@@ -53,7 +53,7 @@ public ResponseEntity cadastrar(@RequestBody LivroRequest request){
   Livro livro = new Livro();
   livro.setISBN(request.getISBN());
   livro.setTitulo(request.getTitulo());
-  livro.setId(request.getId());
+
 
   try {
     repository.save(livro);

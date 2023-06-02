@@ -37,6 +37,6 @@ public class Editora{
     @GeneratedValue(generator = "seqEditora", strategy = GenerationType.SEQUENCE)
     private int id;
 
-    @OneToMany(mappedBy = "livro")
+    @OneToMany(mappedBy = "editora")
     private  List<Livro> livros;
 }

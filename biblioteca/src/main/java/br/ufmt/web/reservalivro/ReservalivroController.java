@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ufmt.web.livro.LivroRepository;
+import br.ufmt.web.reserva.ReservaRepository;
 import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(path = "/reservalivro")
@@ -20,6 +22,11 @@ import lombok.RequiredArgsConstructor;
 
 public class ReservalivroController {
     private final ReservalivroRepository repository;
+
+
+    private final LivroRepository livrorepository;
+    private final ReservaRepository reservaRepository;
+
 
     @GetMapping(path = "/")
     public List<ReservaLivro> index(){
@@ -50,8 +57,11 @@ public ResponseEntity<Void> remover(@PathVariable(name = "pk") int id){
 @PostMapping
 public ResponseEntity cadastrar(@RequestBody ReservalivroRequest request){
   ReservaLivro reservaLivro = new ReservaLivro();
-  reservaLivro.setReserva(request.getReserva());
-  reservaLivro.setLivro(request.getLivro());
+  reservaLivro.setLivro(livrorepository.findById(request.getLivroId()).get());
+  reservaLivro.setReserva(reservaRepository.findById(request.getReservaId()).get());
+
+
+  
  reservaLivro.setId(request.getId());
   try {
     repository.save(reservaLivro);
@@ -67,8 +77,8 @@ public ResponseEntity atualizar(@PathVariable int id,
                               @RequestBody ReservalivroRequest request){
  ReservaLivro reservaLivro = new ReservaLivro();
   reservaLivro.setId(id);
-  reservaLivro.setReserva(request.getReserva());
-  reservaLivro.setLivro(request.getLivro());
+  reservaLivro.setLivro(livrorepository.findById(request.getLivroId()).get());
+  reservaLivro.setReserva(reservaRepository.findById(request.getReservaId()).get());
 
   try {
     repository.save(reservaLivro);

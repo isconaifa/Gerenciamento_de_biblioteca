@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class ReservalivroRequest {
-    private Reserva reserva;
-    private Livro livro;
+    private int ReservaId;
+    private int  livroId;
     private int id;
 }

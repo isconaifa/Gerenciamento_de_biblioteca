@@ -1,6 +1,8 @@
 package br.ufmt.web.genero;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +24,9 @@ public class GeneroController {
     private final GeneroRepository repository;
 
     @GetMapping(path = "/")
-    public List<Genero> index(){
-      return repository.findAll();
+    public List<GeneroResponse> index(){
+
+     return repository.findAll().stream().map(GeneroResponse::from).collect(Collectors.toList());
     }
 
     @GetMapping(path = "/{id}")

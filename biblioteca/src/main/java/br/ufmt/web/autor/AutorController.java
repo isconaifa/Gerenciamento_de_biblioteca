@@ -2,6 +2,7 @@ package br.ufmt.web.autor;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -25,8 +26,8 @@ public class AutorController {
     private final AutorRepository repository;
 
     @GetMapping(path = "/")
-    public List<Autor> index(){
-      return repository.findAll();
+    public List<AutorResponse> index(){
+      return repository.findAll().stream().map(AutorResponse::from).collect(Collectors.toList());
     }
 
     @GetMapping(path = "/{id}")
@@ -55,6 +56,7 @@ public ResponseEntity cadastrar(@RequestBody AutorRequest request){
   Autor autor = new Autor();
   autor.setNome(request.getNome());
   autor.setCpf(request.getCpf());
+  autor.setEndereco(request.getEndereco());
 
   try {
     repository.save(autor);
@@ -71,6 +73,9 @@ public ResponseEntity atualizar(@PathVariable int id,
   Autor autor = new Autor();
   autor.setId(id);
   autor.setNome(request.getNome());
+  autor.setEndereco(request.getEndereco());
+  autor.setCpf(request.getCpf());
+  
 
   try {
     repository.save(autor);

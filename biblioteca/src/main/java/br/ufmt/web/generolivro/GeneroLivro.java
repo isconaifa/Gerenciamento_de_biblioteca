@@ -16,7 +16,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "generolivro")
-@SequenceGenerator(name = "seqGeneroLivro", sequenceName = "generolivro", allocationSize = 1)
+@SequenceGenerator(name = "seqGeneroLivro", sequenceName = "seq_generolivro", allocationSize = 1)
 @Getter
 @Setter
 

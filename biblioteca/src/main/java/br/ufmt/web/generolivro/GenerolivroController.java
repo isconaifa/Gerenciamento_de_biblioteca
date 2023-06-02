@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ufmt.web.genero.GeneroRepository;
+import br.ufmt.web.livro.LivroRepository;
 import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(path = "/generolivro")
@@ -20,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 
 public class GenerolivroController {
     private final GenerolivroRepository repository;
+    private final GeneroRepository generoRepository;
+    private final LivroRepository livroRepository;
 
     @GetMapping(path = "/")
     public List<GeneroLivro> index(){
@@ -50,8 +54,9 @@ public ResponseEntity<Void> remover(@PathVariable(name = "pk") int id){
 @PostMapping
 public ResponseEntity cadastrar(@RequestBody GenerolivroRequest request){
   GeneroLivro generoLivro = new GeneroLivro();
-  generoLivro.setLivro(request.getLivro());
-  generoLivro.setGenero(request.getGenero());
+  generoLivro.setGenero(generoRepository.findById(request.getGeneroId()).get());
+  generoLivro.setLivro(livroRepository.findById(request.getLivroId()).get());
+
 
   try {
     repository.save(generoLivro);
@@ -67,8 +72,8 @@ public ResponseEntity atualizar(@PathVariable int id,
                               @RequestBody GenerolivroRequest request){
  GeneroLivro generoLivro = new GeneroLivro();
   generoLivro.setId(id);
-  generoLivro.setLivro(request.getLivro());
-  generoLivro.setGenero(request.getGenero());
+  generoLivro.setGenero(generoRepository.findById(request.getGeneroId()).get());
+  generoLivro.setLivro(livroRepository.findById(request.getLivroId()).get());
 
   try {
     repository.save(generoLivro);
@@ -77,6 +82,5 @@ public ResponseEntity atualizar(@PathVariable int id,
     return ResponseEntity.badRequest().build();
   }
   return ResponseEntity.ok().build();
-}
-    
+}   
 }
